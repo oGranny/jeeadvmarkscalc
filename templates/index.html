@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Marks calculator</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-blue-200">
+    <div class="flex justify-center items-center h-screen flex-col">
+        <div class="absolute top-0 w-full text-center mt-4">
+            <h1 class="text-3xl font-semibold">JEE Advanced 2024 Marks Calculator</h1>
+        </div>
+        <div class="bg-white rounded-lg p-8 px-12 shadow-lg mt-16 flex flex-col">
+            <form action="/result" method="post">
+
+
+
+
+                <p class="text-lg mb-4">Enter response sheet link:</p>
+                <div class="flex items-center mb-4">
+                    <input type="text" name="response_link" class="px-4 py-2 border border-gray-300 rounded-lg mr-4"
+                        placeholder="response link">
+
+
+                    <!-- <label class="flex items-center cursor-pointer hidden">
+                        <span class="mr-2">P1</span>
+                        <div class="relative">
+                            <input type="checkbox" value="1" name="toggle" class="hidden" id="toggle" />
+                            <div class="toggle__line w-12 h-6 bg-blue-400 rounded-full shadow-inner"></div>
+                            <div
+                                class="toggle__dot absolute w-6 h-6 bg-white rounded-full shadow left-0 top-0 transition-transform duration-300 ease-in-out">
+                            </div>
+                        </div>
+                        <span class="ml-2">P2</span>
+                    </label> -->
+                </div>
+
+
+                <div class="mb-4">
+                    <p class="text-sm mb-2">Select answer key:</p>
+                    <div class="flex flex-col text-sm">
+                        <label class="mb-2">
+                            <input checked type="radio" name="option" value="Aakash" class="mr-2"> Aakash
+                        </label>
+                        <label class="mb-2">
+                            <input disabled type="radio" name="option" value="Allen" class="mr-2  text-gray">
+                            Allen
+                        </label>
+                        <label class="mb-2">
+                            <input disabled type="radio" name="option" value="Fiitjee" class="mr-2 text-gray">
+                            Fiitjee
+                        </label>
+                        <label class="mb-2">
+                            <input type="radio" name="option" value="Official" disabled class="mr-2 text-gray">
+                            Official
+                        </label>
+                    </div>
+                </div>
+
+                <div class="flex justify-center mt-4">
+                    <button
+                        class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                        type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="absolute bottom-0 left-0 w-full text-center p-4">
+        <p class="text-sm text-gray-600">Check out the <a href="" class="text-blue-500 hover:underline">source code</a>.
+        </p>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Marks calculator</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-gray-100">
+    <div class="container mx-auto p-4">
+        <!-- Student Information -->
+        <div class="mb-4">
+            <div class="flex justify-between mb-2">
+                <div>
+                    <span class="font-bold">Roll Number:</span> {{meta['roll_no']}}
+                </div>
+                <div>
+                    <span class="font-bold">Shift:</span> {{meta['shift']}}
+                </div>
+            </div>
+            <div>
+                <span class="font-bold">Name:</span> {{meta['name']}}
+            </div>
+        </div>
+
+        <!-- Total Marks -->
+        <div class="bg-gray-200 rounded-md p-4 mb-4">
+            <div class="text-center">
+                <span class="text-lg font-bold">Total Marks: </span>
+                <span class="text-3xl text-blue-500 font-bold">{{marks}}</span>
+            </div>
+        </div>
+
+        <!-- Question Details Table -->
+        <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Question ID
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Subject
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Question Type
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Response
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Marks
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                    <!-- Example row 1 -->
+
+                    {% for key in response %}
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            {{key}}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            {{response[key]['subject']}}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            {{response[key]['question_type']}}
+                        </td>
+                        <td class="px-6 py-4 break-words max-w-xs whitespace-pre-wrap text-sm text-gray-900">
+                            {% if response[key]['question_type'] != "SA" %}
+                            Option {% endif %} {% for option in
+                            response[key]['chosen_option'] %} {{option}} {%endfor%}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            {{response[key]['marks']}}
+                        </td>
+                    </tr>
+                    {%endfor%}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

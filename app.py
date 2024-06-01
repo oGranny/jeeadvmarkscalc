@@ -28,6 +28,7 @@ def submit():
             req = (requests.get(link))
             meta = getShiftData(req.text)
             response = generate_response(req.text)
+            print(link)
             shift = meta['shift']
             with open(f'static/json/aakash_p{shift}.json') as f:
                 response, marks = checkAnswers(response, json.load(f))
@@ -39,7 +40,7 @@ def submit():
 
 def checkAnswers(solution:dict, answers:dict) -> Tuple[dict, int]:
     marks = 0
-    paraques = (618074219, 618074220,618074218,618074221,618074237,618074235,618074238,618074236,618074253,618074254,618074252,618074255)
+    paraques = (618074219,618074220,618074218,618074221,618074237,618074235,618074238,618074236,618074253,618074254,618074252,618074255)
     out = solution
     for key in answers:
         if solution[int(key)]["question_type"] != "MSQ":
@@ -47,15 +48,21 @@ def checkAnswers(solution:dict, answers:dict) -> Tuple[dict, int]:
                 if solution[int(key)]["option_ids"] == []:
                     out[int(key)]["marks"] = 0
                     marks += 0
-                elif id in solution[int(key)]["option_ids"] and solution[int(key)]["question_type"] == "SA" and key in paraques:
-                    out[int(key)]["marks"] = 3
-                    marks += 3
+                elif key in paraques:
+                    if id in solution[int(key)]["option_ids"]:
+                        out[int(key)]["marks"] = 3
+                        marks += 3
+                    else:      
+                        out[int(key)]["marks"] = 0
+
                 elif id in solution[int(key)]["option_ids"] and solution[int(key)]["question_type"] == "SA":
                     out[int(key)]["marks"] = 4
                     marks += 4
+
                 elif id not in solution[int(key)]["option_ids"] and solution[int(key)]["question_type"] == "SA":
                     out[int(key)]["marks"] = 0
                     marks += 0
+
                 elif id in solution[int(key)]["option_ids"] and solution[int(key)]["question_type"] == "MCQ":
                     out[int(key)]["marks"] = 3
                     marks += 3
@@ -66,7 +73,6 @@ def checkAnswers(solution:dict, answers:dict) -> Tuple[dict, int]:
         else: 
             a = sorted(solution[int(key)]["option_ids"])
             b = sorted(answers[key])
-            print(a[:2],b[:2])
             negative = False
             for elt in a:
                 if elt not in b:

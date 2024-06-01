@@ -30,7 +30,8 @@ def submit():
             response = generate_response(req.text)
             print(link)
             shift = meta['shift']
-            with open(f'static/json/aakash_p{shift}.json') as f:
+            data = data['option']
+            with open(f'static/json/{data}_p{shift}.json') as f:
                 response, marks = checkAnswers(response, json.load(f))
             return render_template('result.html', response=response, meta=meta, marks=marks)
     except Exception as e:
@@ -49,7 +50,7 @@ def checkAnswers(solution:dict, answers:dict) -> Tuple[dict, int]:
                     out[int(key)]["marks"] = 0
                     marks += 0
                 elif int(key) in paraques:
-                    if id in solution[int(key)]["option_ids"]:
+                    if float(id) in [float(i) for i in solution[int(key)]["option_ids"]]:
                         out[int(key)]["marks"] = 3
                         marks += 3
                     else:      

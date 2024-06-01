@@ -55,14 +55,14 @@ def checkAnswers(solution:dict, answers:dict) -> Tuple[dict, int]:
                         marks += 3
                     else:      
                         out[int(key)]["marks"] = 0
+                elif solution[int(key)]["question_type"] == "SA":
+                    if int(id) in [int(i) for i in solution[int(key)]["option_ids"]]:
+                        out[int(key)]["marks"] = 4
+                        marks += 4
 
-                elif id in solution[int(key)]["option_ids"] and solution[int(key)]["question_type"] == "SA":
-                    out[int(key)]["marks"] = 4
-                    marks += 4
-
-                elif id not in solution[int(key)]["option_ids"] and solution[int(key)]["question_type"] == "SA":
-                    out[int(key)]["marks"] = 0
-                    marks += 0
+                    elif int(id) not in [int(i) for i in solution[int(key)]["option_ids"]]:
+                        out[int(key)]["marks"] = 0
+                        marks += 0
 
                 elif id in solution[int(key)]["option_ids"] and solution[int(key)]["question_type"] == "MCQ":
                     out[int(key)]["marks"] = 3

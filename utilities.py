@@ -83,10 +83,3 @@ def convertToIndex(options:list) -> list:
             out.append(4)
     return out
 
-
-if __name__ == "__main__":
-    response = requests.get("https://cdn3.digialm.com//per/g26/pub/32044/touchstone/AssessmentQPHTMLMode1//32044O241/32044O241S1D4699/17169659191175924/242040064_32044O241S1D4699E1.html").text
-    out = generate_response(response)
-
-    with open("response.json", "w") as outfile: 
-        json.dump(out, outfile)

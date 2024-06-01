@@ -83,3 +83,7 @@ def convertToIndex(options:list) -> list:
             out.append(4)
     return out
 
+
+# if __name__ == "__main__":
+#     with open('response.json', 'w') as f:
+#         json.dump(resp, f)

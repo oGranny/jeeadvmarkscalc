@@ -15,8 +15,8 @@ def format_server_time():
 
 @app.route('/')
 def hello_world():
-    make_response("site temporarily down", 404)
-    # return render_template("index.html")
+    # make_response("site temporarily down", 404)
+    return render_template("index.html")
 
     
 @app.route('/result', methods= ['POST', 'GET'])
@@ -39,7 +39,7 @@ def submit():
 
 def checkAnswers(solution:dict, answers:dict) -> Tuple[dict, int]:
     marks = 0
-    paraques = [13,14,15,16,30,31,32,33,46,47,48,49]
+    paraques = (618074219, 618074220,618074218,618074221,618074237,618074235,618074238,618074236,618074253,618074254,618074252,618074255)
     out = solution
     for key in answers:
         if solution[int(key)]["question_type"] != "MSQ":
@@ -47,6 +47,9 @@ def checkAnswers(solution:dict, answers:dict) -> Tuple[dict, int]:
                 if solution[int(key)]["option_ids"] == []:
                     out[int(key)]["marks"] = 0
                     marks += 0
+                elif id in solution[int(key)]["option_ids"] and solution[int(key)]["question_type"] == "SA" and key in paraques:
+                    out[int(key)]["marks"] = 3
+                    marks += 3
                 elif id in solution[int(key)]["option_ids"] and solution[int(key)]["question_type"] == "SA":
                     out[int(key)]["marks"] = 4
                     marks += 4

@@ -1,4 +1,4 @@
-#JEE adv 2024 marks calculator
+# JEE adv 2024 marks calculator
 
 this website is hosted at https://frozen-gabriela-jeemarkscalc-e97822d1.koyeb.app/
 you just need to enter your response sheet link
